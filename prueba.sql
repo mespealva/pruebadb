@@ -81,16 +81,16 @@ UPDATE listado_productos l SET valortotal_p=(SELECT (valor_unitario*cantidad) FR
 --SELECT sum(valor_unitario*cantidad) AS subtotal, factura_id FROM productos p JOIN listado_productos l ON p.id=l.producto_id GROUP BY (factura_id);
 
 --Para la factura se deberá almacenar el subtotal de la factura, que corresponde a la suma de todos los valores unitarios multiplicado por la cantidad respectiva.
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=1) WHERE id=1;
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=2) WHERE id=2;
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=3) WHERE id=3;
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=4) WHERE id=4;
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=5) WHERE id=5;
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=6) WHERE id=6;
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=7) WHERE id=7;
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=8) WHERE id=8;
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=9) WHERE id=9;
-UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos p JOIN listado_productos l ON p.id=l.producto_id WHERE factura_id=10) WHERE id=10;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=1) WHERE id=1;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=2) WHERE id=2;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=3) WHERE id=3;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=4) WHERE id=4;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=5) WHERE id=5;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=6) WHERE id=6;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=7) WHERE id=7;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=8) WHERE id=8;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=9) WHERE id=9;
+UPDATE facturas SET subtotal=(SELECT SUM(valortotal_p) FROM listado_productos WHERE factura_id=10) WHERE id=10;
 --set los ivas
 UPDATE facturas SET iva=subtotal*0.19;
 --set precio total como entero
