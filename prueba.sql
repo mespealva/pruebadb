@@ -62,7 +62,7 @@ UPDATE facturas SET subtotal=(SELECT SUM(valor_unitario*cantidad) FROM productos
 --set los ivas
 UPDATE facturas SET iva=subtotal*0.19;
 --set precio total
-UPDATE facturas SET precio_total=subtotal*1.19;
+UPDATE facturas SET precio_total=CEILING(subtotal+iva);
 
 --¿Que cliente realizó la compra más cara?
 SELECT nombre FROM clientes JOIN clientes_facturas ON clientes.id=clientes_facturas.cliente_id JOIN facturas ON facturas.id=clientes_facturas.factura_id ORDER BY(precio_total) DESC LIMIT(1);
