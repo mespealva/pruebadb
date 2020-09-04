@@ -11,7 +11,9 @@ CREATE TABLE productos(id SERIAL PRIMARY KEY, nombre VARCHAR(50), descripcion VA
 
 CREATE TABLE clientes_facturas(cliente_id INT NOT NULL, factura_id INT NOT NULL, FOREIGN KEY(cliente_id) REFERENCES clientes(id), FOREIGN KEY(factura_id) REFERENCES facturas(id));
 
-CREATE TABLE listado_productos(factura_id INT, producto_id INT, FOREIGN KEY(factura_id) REFERENCES facturas(id), FOREIGN KEY(producto_id) REFERENCES productos(id), cantidad INT NOT NULL);
+CREATE TABLE listado_productos(id SERIAL PRIMARY KEY, factura_id INT, producto_id INT, FOREIGN KEY(factura_id) REFERENCES facturas(id), FOREIGN KEY(producto_id) REFERENCES productos(id), cantidad INT NOT NULL);
+
+CREATE TABLE productos_categorias (categoria_id INT, FOREIGN KEY (categoria_id) REFERENCES categorias(id), producto_id INT, FOREIGN KEY (producto_id) REFERENCES productos(id));
 
 --5 clientes
 INSERT INTO clientes(nombre, apellido, rut, direccion, comuna, region) VALUES ('francisca gonzalez', 1, 'portugal 12','santiago', 'RM'), ('ignacio reyes', 12, 'providencia 1665', 'providencia', 'RM'), ('maria pino', 123, 'campiñas 12', 'rancagua', 'ohiggins'), ('manuel cisternas', 1234, 'Coquimbo 394', 'santiago', 'RM'), ('Melisa reyes', 12345, 'alameda 2', 'la cisterna', 'RM');
@@ -21,6 +23,9 @@ INSERT INTO productos(nombre, valor_unitario) VALUES ('manzana', 500), ('lechuga
 
 --3 categorias
 INSERT INTO categorias(nombre) VALUES ('frutas'), ('verduras'),('legumbres');
+
+--ingresar productos a categorias
+INSERT INTO productos_categorias(categoria_id, producto_id) VALUES (1,1), (2,2),(3,3), (3,4), (2,5), (1,6), (1,7), (1,8);
 
 --10 facturas (para crear los ids)
 INSERT INTO facturas(subtotal) VALUES(0);
